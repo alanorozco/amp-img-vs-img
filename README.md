@@ -1,6 +1,8 @@
 # `<amp-img>` vs. native `<img>`
 
-Toolkit to measure difference in [web vitals](https://web.dev/vitals) when `<img>` is used in favor of `<amp-img>`. See steps in sections below, but if you have a large set of URLs, then simply:
+Toolkit to measure difference in [web vitals](https://web.dev/vitals) when `<img>` is used in favor of `<amp-img>`.
+
+If you have a large set of URLs, then simply run:
 
 ```sh
 npm install
@@ -10,7 +12,7 @@ chmod +x fetch_all.sh
 ./benchmark.sh
 ```
 
-...individually:
+Otherwise, see individual steps.
 
 ## 0. Install
 
