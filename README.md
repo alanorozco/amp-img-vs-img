@@ -32,7 +32,7 @@ chmod +x fetch_all.sh # make runnable
 1. Takes a list of URLs of AMP documents, or documents that link to an AMP version
 2. Filters them randomly\*
 3. Resolves AMP version if linked
-4. Prints as shell commands, to output into script `> my_script.sh`
+4. Prints as shell commands, to output into script (`> fetch_all.sh`)
 
 ```sh
 # file is written like:
