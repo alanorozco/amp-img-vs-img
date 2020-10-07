@@ -85,7 +85,7 @@ output/
 Use [`tachometer`](https://www.npmjs.com/package/tachometer) to measure for **LCP** and **CLS** on documents transformed previously:
 
 ```sh
-./benchmark
+./measure
 ```
 
 This compares metrics between optimized output documents:
