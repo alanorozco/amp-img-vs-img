@@ -1,0 +1,14 @@
+{
+  "name": "native-img",
+  "description": "Toolkit to measure difference in [web vitals](https://web.dev/vitals) when `<img>` is used in favor of `<amp-img>`. See steps in sections below, but if you have a large set of URLs, then simply:",
+  "version": "0.0.0",
+  "main": "filter.js",
+  "devDependencies": {},
+  "author": "alan orozco <alan@orozco.xyz>",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@ampproject/toolbox-optimizer": "2.6.0",
+    "jsdom": "16.4.0",
+    "node-fetch": "2.6.1"
+  }
+}
