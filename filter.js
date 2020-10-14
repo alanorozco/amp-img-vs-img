@@ -17,7 +17,13 @@ const readline = require("readline");
 const { JSDOM } = require("jsdom");
 
 async function getAmphtmlUrl(url) {
-  const dom = await JSDOM.fromURL(url);
+  let dom;
+  try {
+    dom = await JSDOM.fromURL(url);
+  } catch {
+    /* 🤷‍♂️ */
+    return;
+  }
   const linkRelAmphtml = dom.window.document.head.querySelector(
     "link[rel=amphtml]"
   );
@@ -35,8 +41,6 @@ const probability = parseFloat(probabilityStr);
 
 const getHostname = (url) => url.replace(/^https?:\/\//, "").split("/")[0];
 
-let count = 0;
-
 const hostnames = new Set();
 
 const file = readline.createInterface({
@@ -45,21 +49,33 @@ const file = readline.createInterface({
   terminal: false,
 });
 
-file.on("line", async (url) => {
-  const hostname = getHostname(url);
-  if (Math.random() > probability) {
-    return;
-  }
-  if (hostnames.has(hostname)) {
-    return;
-  }
-  hostnames.add(hostname);
-  try {
-    const amphtmlUrl = await getAmphtmlUrl(url);
-    if (amphtmlUrl) {
-      console.log("node fetch.js", `\`printf "%q" "${amphtmlUrl}"\``);
+(async () => {
+  const output = [];
+
+  file.on("line", async (url) => {
+    const hostname = getHostname(url);
+    if (Math.random() > probability) {
+      return;
     }
-  } catch {
-    // 🤷‍♂️
-  }
-});
+    if (hostnames.has(hostname)) {
+      return;
+    }
+    hostnames.add(hostname);
+    output.push(
+      getAmphtmlUrl(url).then(
+        (amphtmlUrl) => {
+          if (amphtmlUrl) {
+            console.log(`node fetch.js \`printf "%q" "${amphtmlUrl}"\``);
+          }
+        },
+        () => {
+          /* 🤷‍♂️ */
+        }
+      )
+    );
+  });
+
+  await new Promise((resolve) => {
+    file.on("close", () => Promise.all(output).then(resolve));
+  });
+})();
