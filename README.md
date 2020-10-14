@@ -1,6 +1,6 @@
 # `<amp-img>` vs. native `<img>`
 
-Toolkit to measure difference in [web vitals](https://web.dev/vitals) when `<img>` is used in favor of `<amp-img>`.
+Toolkit to measure difference in [web vitals](https://web.dev/vitals) when `<img>` is server-side rendered in every `<amp-img>`.
 
 If you have a large set of URLs, then simply run:
 
